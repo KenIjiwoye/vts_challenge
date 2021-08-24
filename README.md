@@ -10,6 +10,8 @@ Protected Routes:
 -results
 -update profile
 
+Q: Should the results from the lookup screen stay within the same screen? Or be displayed on a separate screen?
+
 Number #3. The event to disable the first route... Should this be invoked by a user? Or should this be done programatically during navigating between screens?
 
 ## Available Scripts
