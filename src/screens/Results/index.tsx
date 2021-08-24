@@ -16,7 +16,7 @@ export const Results = (props: any) => {
             <Col sm={4} >
                 <Card>
                     <Card.Body>
-                        <ListItems />
+                        <ListItems location={props.location} />
                     </Card.Body>
                 </Card>
             </Col>

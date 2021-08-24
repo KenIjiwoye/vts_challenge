@@ -1,6 +1,8 @@
 import React from 'react'
 import ListGroup from 'react-bootstrap/ListGroup'
+import ReactWeather, { useWeatherBit } from 'react-open-weather';
 
+// mock data for setting up component
 const weatherData: any = [
     {
         day: 'Monday',
@@ -25,16 +27,23 @@ const weatherData: any = [
     },
 ]
 
-const ListItems = () => {
+const ListItems = (props:any) => {
+    const { data, isLoading, errorMessage } = useWeatherBit({
+        key: process.env.REACT_APP_WEATHERBIT_KEY,
+        lat: props.location ? props.location.lat : 33.7676931,
+        lon: props.location ? props.location.lng : -84.4906435,
+        lang: 'en',
+        unit: 'I', // values are (M,S,I)
+      });
     return (
-        <ListGroup>
-            {weatherData && (weatherData.map((temp:any) => (<ListGroup.Item key={temp.id} > <strong>{temp.day}:</strong> <br/> {temp.condition} <br/> high: {temp.high} <br/> low: {temp.low} </ListGroup.Item>)))}
-            {/* <ListGroup.Item>Cras justo odio</ListGroup.Item>
-            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-            <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-            <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-            <ListGroup.Item>Vestibulum at eros</ListGroup.Item> */}
-        </ListGroup>
+           <ReactWeather
+            isLoading={isLoading}
+            errorMessage={errorMessage}
+            data={data}
+            lang="en"
+            unitsLabels={{ temperature: 'F', windSpeed: 'Mi/h' }}
+            showForecast
+            />
     )
 }
 
