@@ -13,17 +13,19 @@ const Mapview = (props:any) => {
         <div style={{ height: '70vh', width: '100%' }}>
         <GoogleMapReact
             bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
-            defaultCenter={defaultProps.center}
+            center={ props.location ? props.location : defaultProps.center }
             defaultZoom={defaultProps.zoom}
         >
-            {/* <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
+            <PlaceIcon
+            lat={ props.location ? props.location.lat : defaultProps.center.lat }
+            lng={ props.location ? props.location.lng : defaultProps.center.lng }
             text="My Marker"
-            /> */}
+            />
         </GoogleMapReact>
         </div>
     )
 }
+
+const PlaceIcon = (props:any) => <i className="bi bi-geo-fill" style={{ fontSize: '3em', color:'#ff0000'}} ></i>
 
 export default Mapview

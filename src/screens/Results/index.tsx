@@ -5,12 +5,12 @@ import Card from 'react-bootstrap/Card'
 import ListItems from '../../components/ListItems/ListItems'
 import Mapview from './Mapview'
 
-export const Results = () => {
+export const Results = (props: any) => {
     return (
         <Row>
             <Col sm={8} >
                 <Card>
-                    <Card.Body> <Mapview /> </Card.Body>
+                    <Card.Body> <Mapview location={props.location} /> </Card.Body>
                 </Card>
             </Col>
             <Col sm={4} >

@@ -12,6 +12,7 @@ import {
 
 export const Lookup = () => {
   const [address, setAddress] = useState('')
+  const [coords, setCoords] = useState()
   const handleChange = (address:string) => {
     setAddress(address)
   };
@@ -19,11 +20,14 @@ export const Lookup = () => {
   const handleSelect = (address:string) => {
     geocodeByAddress(address)
       .then((results:any) => getLatLng(results[0]))
-      .then((latLng:any) => console.log('Success', latLng))
+      .then((latLng:any) => {
+        console.log('Success', latLng)
+        setCoords(latLng)
+      })
       .catch((error:any) => console.error('Error', error));
   };
   return <div>
-    <h1>VTS Demo App</h1>
+    <h1>VTS Demo App <i className="bi bi-geo-fill"></i></h1>
     {/* <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Enter an address</Form.Label>
@@ -77,6 +81,6 @@ export const Lookup = () => {
      )}
       </PlacesAutocomplete>
     <hr/>
-    <Results />
+    <Results location={coords} />
   </div>;
 };
