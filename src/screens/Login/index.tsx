@@ -8,6 +8,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 type Inputs = {
     email: string,
     password: string,
+    username: string,
   };
 
 const Login = (props:any) => {
@@ -22,6 +23,11 @@ const Login = (props:any) => {
              <Card>
                  <Card.Body>
                     <Form onSubmit ={handleSubmit(onSubmit)} >
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control type="text" placeholder="Enter Username..." {...register("username", {required: true})} />
+                            {errors.email && <span style={{color:'red'}} >This field is required</span>}
+                        </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <Form.Control type="email" placeholder="Enter an email address..." {...register("email", {required: true})} />

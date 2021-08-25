@@ -11,8 +11,22 @@ Protected Routes:
 -update profile
 
 Q: Should the results from the lookup screen stay within the same screen? Or be displayed on a separate screen?
+-Currently I have them showing on the same screen
 
 Number #3. The event to disable the first route... Should this be invoked by a user? Or should this be done programatically during navigating between screens?
+-Currently I have this done upon navigating to another route.
+
+### Walkthrough
+
+    1. Use any combo of username, email, password to log into app
+    2. Search for location on the map and it will show an auto suggestion dropdown
+    3. choose an address and the it will show on the center of map and pull up current weather forecast for that area (WeatherBit API)
+    4. Navigate to Profile page and you will notice that the first route is no longer accessible.
+
+    5. Update the user details on this page and component will refresh instantly to show new data. (localStorage)
+    6. Logout button will redirect you to the login screen.
+
+Enjoy!! :)
 
 ## Available Scripts
 
