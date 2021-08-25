@@ -13,6 +13,7 @@ import {
 export const Lookup = () => {
   const [address, setAddress] = useState('')
   const [coords, setCoords] = useState()
+
   const handleChange = (address:string) => {
     setAddress(address)
   };
@@ -61,7 +62,6 @@ export const Lookup = () => {
              const className = suggestion.active
                ? 'suggestion-item--active'
                : 'suggestion-item';
-             // inline style for demonstration purpose
              const style = suggestion.active
                ? { backgroundColor: '#fafafa', cursor: 'pointer' }
                : { backgroundColor: '#ffffff', cursor: 'pointer' };
