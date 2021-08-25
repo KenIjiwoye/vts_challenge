@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import Container from 'react-bootstrap/Container'
 import { Link } from 'react-router-dom'
 
-export const Navigation = () => {
+export const Navigation = (props:any) => {
     return (
         <Navbar bg="light" expand="lg">
         <Container>
@@ -17,7 +17,7 @@ export const Navigation = () => {
                 <Link to='/profile' className='nav-link' >My Profile</Link>                
             </Nav>
             <Nav className="ml-auto">
-                <Nav.Link href='#' className='btn btn-info' style={{ color: 'white'}} >Logout</Nav.Link>             
+                <Nav.Link href='#' className='btn btn-info' style={{ color: 'white'}} onClick={props.logout} >Logout</Nav.Link>             
             </Nav>
             </Navbar.Collapse>
         </Container>

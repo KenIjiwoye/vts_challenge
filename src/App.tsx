@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -15,35 +15,53 @@ import Login from './screens/Login';
 function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   const [routeVisited, setRouteVisited] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const checkAuth = localStorage.getItem('currentUser') ? setUserLoggedIn(true) : setUserLoggedIn(false)
+    setIsLoading(false)
+    return checkAuth
+  }, [])
+
+  const logout = () => {
+    localStorage.removeItem('currentUser');
+    setUserLoggedIn(false)
+  }
+
+  const updateUserDetails = () => {}
   return (
     <div>
       <Router>
-        {userLoggedIn && <Navigation />}
-        <Container className="App my-4" >
-         {userLoggedIn ? (
+       {isLoading ? <div style={{ display: 'flex', flexDirection: 'column', justifyContent:'center',  alignItems: 'center', height: '100vh'}} > <h2>Loading...</h2> </div> : (
+          <>
+          {userLoggedIn && <Navigation logout={logout} />}
+          <Container className="App my-4" >
+           {userLoggedIn ? (
+              <Switch>
+              <Route exact path='/'>
+                <Lookup />
+              </Route>
+              <Route path='/profile' >
+                <Profile />
+              </Route>
+              <Route path='*'>
+              <Redirect to="/" />
+            </Route>
+            </Switch>
+           ): (
             <Switch>
-            <Route exact path='/'>
-              <Lookup />
+            <Route exact path='/login'>
+              <Login setUserLoggedIn={setUserLoggedIn}  />
             </Route>
-            <Route path='/profile' >
-              <Profile />
+            <Route path='*'>
+              <Redirect to="/login" />
             </Route>
-            <Route exact path='*'>
-            <Redirect to="/" />
-          </Route>
           </Switch>
-         ): (
-          <Switch>
-          <Route exact path='/login'>
-            <Login />
-          </Route>
-          <Route exact path='*'>
-            <Redirect to="/login" />
-          </Route>
-        </Switch>
-         )}
-          
-        </Container>
+           )}
+            
+          </Container>
+          </>
+       )}
       </Router>
     </div>
   );

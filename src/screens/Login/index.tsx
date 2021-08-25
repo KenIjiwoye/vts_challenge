@@ -10,9 +10,12 @@ type Inputs = {
     password: string,
   };
 
-const Login = () => {
+const Login = (props:any) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
-    const onSubmit: SubmitHandler<Inputs> = data => console.log(data);
+    const onSubmit: SubmitHandler<Inputs> = data => {
+        props.setUserLoggedIn(true)
+        localStorage.setItem('currentUser', JSON.stringify(data))
+    }
     return (
         <Container style={{ width: '500px'}} >
             <h2>Login</h2>
