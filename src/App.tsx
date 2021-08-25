@@ -26,6 +26,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem('currentUser');
     setUserLoggedIn(false)
+    setRouteVisited(false)
   }
 
   const updateUserDetails = () => {}
@@ -39,10 +40,11 @@ function App() {
            {userLoggedIn ? (
               <Switch>
               <Route exact path='/'>
-                <Lookup />
+                {routeVisited ? <Redirect to='/profile' /> : <Lookup /> }
+                
               </Route>
               <Route path='/profile' >
-                <Profile />
+                <Profile setRouteVisited={setRouteVisited}  />
               </Route>
               <Route path='*'>
               <Redirect to="/" />

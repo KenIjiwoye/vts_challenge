@@ -24,6 +24,7 @@ const Profile = (props:any) => {
     useEffect(() => {
         const getUserEmail : any = localStorage.getItem('currentUser')
         setEmail(JSON.parse(getUserEmail).email)
+        props.setRouteVisited(true)
         
     }, [onSubmit])
     return (
